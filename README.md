@@ -1,92 +1,92 @@
-# Powered Diagram
+# Power Diagram
 
-Una herramienta para crear diagramas de secuencia interactivos con botones clickeables que muestran información detallada.
+A tool for creating interactive sequence diagrams with clickable buttons that display detailed information.
 
-## Características
+## Features
 
-- **Sintaxis similar a Mermaid**: Fácil de escribir y entender
-- **Botones interactivos**: Clickea en los botones rojos para ver más información
-- **Múltiples tipos de contenido**: URLs, ejemplos de requests, consultas SQL, HTML preview
-- **Diseño responsive**: Funciona en desktop y móvil
-- **Embebible**: Puede ser incluido en README.md o compartido como HTML
+- **Mermaid-like syntax**: Easy to write and understand
+- **Interactive buttons**: Click on red buttons to see more information
+- **Multiple content types**: URLs, request examples, SQL queries, HTML preview
+- **Responsive design**: Works on desktop and mobile
+- **Embeddable**: Can be included in README.md or shared as HTML
 
-## Sintaxis
+## Syntax
 
-### Definir participantes con colores y alias
+### Define participants with colors and aliases
 ```
-participant "Nombre Completo" as Alias #3498db
+participant "Full Name" as Alias #3498db
 participant "Payment API" as API #e74c3c
-participant ParticipanteSimple #2ecc71
+participant SimpleParticipant #2ecc71
 participant "Database" as DB #f39c12 dashed
 ```
 
-**Estilos de línea de vida disponibles:**
-- `solid` (por defecto): Línea continua
-- `dashed`: Línea discontinua/punteada
+**Available lifeline styles:**
+- `solid` (default): Continuous line
+- `dashed`: Dashed/dotted line
 
-### Mensajes básicos
+### Basic messages
 ```
-Alias->>API: Mensaje de ejemplo
-API-->>Alias: Respuesta (línea discontinua)
-API-->>>Alias: Respuesta (línea punteada)
-```
-
-### Añadir información detallada
-
-Los detalles se añaden usando corchetes después de cada mensaje. Hay dos sintaxis disponibles:
-
-#### Sintaxis simple (una línea):
-```
-[clave: valor]
+Alias->>API: Example message
+API-->>Alias: Response (dashed line)
+API-->>>Alias: Response (dotted line)
 ```
 
-#### Sintaxis de bloque literal (múltiples líneas):
+### Adding detailed information
+
+Details are added using brackets after each message. Two syntaxes are available:
+
+#### Simple syntax (single line):
 ```
-[clave:
+[key: value]
 ```
-contenido con formato
-preservado (saltos de línea, tabulaciones, etc.)
+
+#### Literal block syntax (multiple lines):
+```
+[key:
+```
+content with preserved
+formatting (line breaks, tabs, etc.)
 ```
 ]
 ```
 
-**Estructura**: 
-- **clave**: Determina el tipo de renderizado y el título de la sección
-- **valor/contenido**: El contenido a mostrar
+**Structure**: 
+- **key**: Determines the rendering type and section title
+- **value/content**: The content to display
 
-#### Tipos de renderizado disponibles:
+#### Available rendering types:
 
-##### 1. **title** - Título personalizado del popup
+##### 1. **title** - Custom popup title
 ```
-[title: Mi título personalizado]
+[title: My custom title]
 ```
-*Renderizado*: Se usa como título del modal (no aparece en el contenido)
+*Rendering*: Used as modal title (doesn't appear in content)
 
-##### 2. **button** - Texto del botón
+##### 2. **button** - Button text
 ```
-[button: Mostrar detalles]
+[button: Show details]
 ```
-*Renderizado*: Define el texto que aparece en el botón (no aparece en el contenido del popup)
+*Rendering*: Defines the text that appears on the button (doesn't appear in popup content)
 
-##### 3. **buttonColor** - Color del botón
+##### 3. **buttonColor** - Button color
 ```
 [buttonColor: #27ae60]
 ```
-*Renderizado*: Define el color del botón (formato hexadecimal)
+*Rendering*: Defines the button color (hexadecimal format)
 
-##### 4. **url** - URLs y endpoints
+##### 4. **url** - URLs and endpoints
 ```
 [url: https://api.example.com/v3/users/123]
 ```
-*Renderizado*: Fondo azul claro con código monospace
+*Rendering*: Light blue background with monospace code
 
-##### 5. **request** - Peticiones HTTP (JSON)
-**Sintaxis simple:**
+##### 5. **request** - HTTP requests (JSON)
+**Simple syntax:**
 ```
 [request: {"user_id": 123, "action": "create"}]
 ```
 
-**Sintaxis de bloque (recomendada para JSON):**
+**Block syntax (recommended for JSON):**
 ```
 [request:
 ```
@@ -101,21 +101,21 @@ preservado (saltos de línea, tabulaciones, etc.)
 ]
 ```
 
-*Renderizado*: Bloque de código con formato JSON (pretty-print)
+*Rendering*: Code block with JSON formatting (pretty-print)
 
-##### 6. **response** - Respuestas HTTP (JSON)
+##### 6. **response** - HTTP responses (JSON)
 ```
 [response: {"status": "success", "data": {...}}]
 ```
-*Renderizado*: Bloque de código con formato JSON (pretty-print)
+*Rendering*: Code block with JSON formatting (pretty-print)
 
-##### 7. **sql** - Consultas SQL
-**Sintaxis simple:**
+##### 7. **sql** - SQL queries
+**Simple syntax:**
 ```
 [sql: SELECT * FROM users WHERE id = ?]
 ```
 
-**Sintaxis de bloque (recomendada para SQL complejas):**
+**Block syntax (recommended for complex SQL):**
 ```
 [sql:
 ```
@@ -129,37 +129,37 @@ ORDER BY u.name
 ]
 ```
 
-*Renderizado*: Bloque de código con formato SQL
+*Rendering*: Code block with SQL formatting
 
-##### 8. **html** - Vista previa HTML
+##### 8. **html** - HTML preview
 ```
-[html: <div style="color: red;">Contenido HTML</div>]
+[html: <div style="color: red;">HTML Content</div>]
 ```
-*Renderizado*: Iframe con renderizado del HTML
+*Rendering*: Iframe with HTML rendering
 
-##### 9. **Cualquier otra clave** - Texto simple
+##### 9. **Any other key** - Simple text
 ```
-[description: Esta es una descripción simple]
-[notes: Notas adicionales sobre el proceso]
-[warning: ⚠️ Importante: Verificar permisos]
+[description: This is a simple description]
+[notes: Additional notes about the process]
+[warning: ⚠️ Important: Check permissions]
 ```
-*Renderizado*: Texto simple en párrafo
+*Rendering*: Simple text in paragraph
 
-#### Ejemplo completo con bloques literales:
+#### Complete example with literal blocks:
 ```
-participant "Cliente Web" as Client #2ecc71
+participant "Web Client" as Client #2ecc71
 participant "User API" as API #3498db
 
-Client->>API: Crear nuevo usuario
-[title: Creación de Usuario]
-[button: Ver detalles]
+Client->>API: Create new user
+[title: User Creation]
+[button: View details]
 [buttonColor: #27ae60]
 [url: https://api.example.com/v1/users]
 [request:
 ```
 {
-    "name": "Juan Pérez",
-    "email": "juan@example.com",
+    "name": "John Doe",
+    "email": "john@example.com",
     "profile": {
         "age": 30,
         "department": "Engineering"
@@ -176,11 +176,11 @@ Client->>API: Crear nuevo usuario
 }
 ```
 ]
-[description: Crea un nuevo usuario en el sistema]
-[notes: Requiere autenticación Bearer token]
+[description: Creates a new user in the system]
+[notes: Requires Bearer token authentication]
 ```
 
-## Ejemplo completo
+## Complete example
 
 ```
 participant Vertical #2ecc71
@@ -201,35 +201,59 @@ API->>Database: Store tokenized data
 [sql: INSERT INTO tokenized_accounts (payor_id, token, created_at) VALUES (?, ?, NOW())]
 
 Database-->>API: Success response
-API-->>Vertical: Token response
+API-->>>Vertical: Token response
 ```
 
-## Uso
+## Usage
 
-1. Abre `index.html` en tu navegador
-2. Escribe tu diagrama en el área de texto
-3. Haz click en "Generate Diagram"
-4. Clickea en los botones rojos para ver información detallada
+1. Open `index.html` in your browser
+2. Write your diagram in the text area
+3. Click "Generate Diagram"
+4. Click on red buttons to see detailed information
 
-## Estructura del proyecto
+## Project structure
 
-- `index.html` - Página principal
-- `styles.css` - Estilos y diseño
-- `diagram-parser.js` - Parser para la sintaxis del diagrama
-- `diagram-renderer.js` - Renderizador SVG
-- `app.js` - Aplicación principal
+- `index.html` - Main page
+- `styles.css` - Styles and design
+- `diagram-parser.js` - Parser for diagram syntax
+- `diagram-renderer.js` - SVG renderer
+- `app.js` - Main application
 
-## Personalización
+## Customization
 
-Puedes modificar los estilos en `styles.css` para cambiar colores, tamaños y apariencia general del diagrama.
+You can modify styles in `styles.css` to change colors, sizes, and general appearance of the diagram.
 
-## Compartir
+## Sharing
 
-Para compartir un diagrama:
-1. Genera el diagrama
-2. Usa el botón "Download diagram (HTML)" para descargar
-3. Comparte el archivo HTML con tu equipo
-4. O embebe el HTML en README.md usando `<iframe>` o copiando el código SVG generado
+To share a diagram:
+1. Generate the diagram
+2. Use the "Download diagram (HTML)" button to download
+3. Share the HTML file with your team
+4. Or embed the HTML in README.md using `<iframe>` or by copying the generated SVG code
+
+## Features
+
+### Interactive Elements
+- **Clickable buttons**: Each message can have interactive buttons with custom text and colors
+- **Modal popups**: Detailed information displays in elegant modal windows
+- **Hover tooltips**: Lifelines show participant names on hover for easy navigation
+
+### Customization Options
+- **Participant colors**: Custom hex colors for each participant
+- **Button colors**: Individual button color customization
+- **Lifeline styles**: Choose between solid and dashed lifelines
+- **Aliases**: Use short aliases for long participant names
+
+### Advanced Syntax
+- **Three arrow types**: Solid (`->>`), dashed (`-->>`), and dotted (`-->>>`)
+- **Multi-line blocks**: Preserve formatting for JSON, SQL, and HTML content
+- **Participant positioning**: Top and bottom participant boxes for long diagrams
+- **Responsive design**: Works perfectly on desktop and mobile devices
+
+### Export Options
+- **HTML download**: Generate standalone HTML files for sharing
+- **Mermaid export**: Convert diagrams to standard Mermaid format
+- **Copy functionality**: Easy color code copying with integrated color picker
 
 ---
 
