@@ -80,8 +80,14 @@ WHERE id = ?
 ]"></textarea>
             <div class="button-group">
                 <button id="generateBtn">Generate Diagram</button>
-                <button id="shareBtn" title="Generate shareable HTML">📥 Download diagram (HTML)</button>
-                <button id="mermaidBtn" title="Export to Mermaid format">📊 Export Mermaid</button>
+                <div class="dropdown">
+                    <button id="exportBtn" class="dropdown-btn">📥 Export ▼</button>
+                    <div class="dropdown-content">
+                        <a href="#" id="shareBtn" title="Generate shareable HTML">📥 Download diagram (HTML)</a>
+                        <a href="#" id="mermaidBtn" title="Export to Mermaid format">📊 Export Mermaid</a>
+                        <a href="#" id="downloadSourceBtn" title="Download diagram definition as text file">📄 Download source</a>
+                    </div>
+                </div>
             </div>
         </div>
         

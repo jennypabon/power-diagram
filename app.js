@@ -11,12 +11,39 @@ class PoweredDiagram {
             this.generateDiagram();
         });
 
-        document.getElementById('shareBtn').addEventListener('click', () => {
+        // Dropdown functionality
+        const exportBtn = document.getElementById('exportBtn');
+        const dropdown = document.querySelector('.dropdown');
+        
+        exportBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdown.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Export button handlers
+        document.getElementById('shareBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdown.classList.remove('show');
             this.generateShareableHTML();
         });
 
-        document.getElementById('mermaidBtn').addEventListener('click', () => {
+        document.getElementById('mermaidBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdown.classList.remove('show');
             this.showMermaidExport();
+        });
+
+        document.getElementById('downloadSourceBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdown.classList.remove('show');
+            this.downloadSource();
         });
 
         // Modal close functionality
@@ -743,6 +770,43 @@ API-->>>V: Token response
             this.fallbackCopyToClipboard(mermaidCode);
             this.showCopyFeedback(copyBtn, '✓ Copied!');
         }
+    }
+
+    downloadSource() {
+        const diagramInput = document.getElementById('diagramInput').value;
+        
+        if (!diagramInput.trim()) {
+            alert('Please enter a diagram definition first!');
+            return;
+        }
+
+        // Create filename with timestamp
+        const now = new Date();
+        const timestamp = now.toISOString().replace(/[:.]/g, '-').slice(0, 19);
+        const filename = `power-diagram-source-${timestamp}.txt`;
+
+        // Create and download the text file
+        const blob = new Blob([diagramInput], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        // Show feedback
+        const downloadBtn = document.getElementById('downloadSourceBtn');
+        const originalText = downloadBtn.innerHTML;
+        downloadBtn.innerHTML = '✓ Downloaded!';
+        downloadBtn.style.background = '#27ae60';
+        
+        setTimeout(() => {
+            downloadBtn.innerHTML = originalText;
+            downloadBtn.style.background = '';
+        }, 2000);
     }
 }
 
